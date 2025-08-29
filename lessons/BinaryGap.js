@@ -2,7 +2,20 @@
  * A binary gap within a positive integer N is any maximal sequence of
  * consecutive zeros that is surrounded by ones at both ends in the binary
  * representation of N.
- *
+ *  
+ const binary = N.toString(2).split('')
+  let max = 0
+  let current = 0
+  for (let i = 0; i < binary.length; i++) {
+      if (binary[i] === '1') {
+          max = Math.max(max, current)
+          current = 0
+      } else {
+          current++
+      }
+  }
+  
+  return max
  * For example, number 9 has binary representation 1001 and contains a binary
  * gap of length 2. The number 529 has binary representation 1000010001 and
  * contains two binary gaps: one of length 4 and one of length 3.
@@ -34,20 +47,18 @@
  */
 
 function solution(N) {
-  const binary = N.toString(2).split('')
-
-  let max = 0
-  let current = 0
-  for (let i = 0; i < binary.length; i++) {
-      if (binary[i] === '1') {
-          max = Math.max(max, current)
-          current = 0
-      } else {
-          current++
-      }
-  }
-  
-  return max
+    let binary = N.toString(2)
+    max = 0;
+    gap = 0;
+    for ( i=0 ; i<binary.length ; i++){
+        if (binary[i]=== '1'){
+            max = Math.max(max,gap)
+            gap = 0;
+        } else {
+            gap++;
+        }
+    }
+    return max;
 }
-
+//console.log(solution(32))
 module.exports = solution
